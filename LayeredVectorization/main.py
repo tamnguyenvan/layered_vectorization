@@ -314,7 +314,7 @@ def load_config(file_path,args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="layered_image_vectorization",)
     parser.add_argument("-c", "--config", type=str, default="./config/base_config.yaml",help="YAML/YML file for configuration.")
-    parser.add_argument("-timg", "--target_path", default="./target_imgs/Snipaste_2024-11-19_16-31-12.png", type=str)
+    parser.add_argument("-timg", "--target_name", default="./target_imgs/Snipaste_2024-11-19_16-31-12.png", type=str)
     parser.add_argument("-fsn", "--file_save_name", type=str, default="man",help="Files save name.")
 
     args = parser.parse_args()
@@ -324,17 +324,8 @@ if __name__ == "__main__":
     layered_vectorization(args,device)
 
     import glob
-    png_files = glob.glob(f'{args.target_path}/*.png')
+    args = load_config(args.config, args)
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    init_diffvg(device=device)
 
-    for i,file_path in enumerate(png_files):
-        parser = argparse.ArgumentParser(description="layered_image_vectorization",)
-        parser.add_argument("-c", "--config", type=str, default="./config/base_config.yaml",help="YAML/YML file for configuration.")
-        parser.add_argument("-timg", "--target_image", default=file_path, type=str)
-        parser.add_argument("-fsn", "--file_save_name", type=str, default=f"004/{file_path.split('/')[-1]}",help="Files save name.")
-
-        args = parser.parse_args()
-        args = load_config(args.config,args)
-        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        init_diffvg(device=device)
-
-        layered_vectorization(args,device)
+    layered_vectorization(args, device)
