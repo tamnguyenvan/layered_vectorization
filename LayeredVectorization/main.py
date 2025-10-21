@@ -314,7 +314,7 @@ def load_config(file_path,args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="layered_image_vectorization",)
     parser.add_argument("-c", "--config", type=str, default="./config/base_config.yaml",help="YAML/YML file for configuration.")
-    parser.add_argument("-timg", "--target_name", default="./target_imgs/Snipaste_2024-11-19_16-31-12.png", type=str)
+    parser.add_argument("-timg", "--target_image", default="./target_imgs/Snipaste_2024-11-19_16-31-12.png", type=str)
     parser.add_argument("-fsn", "--file_save_name", type=str, default="man",help="Files save name.")
 
     args = parser.parse_args()
