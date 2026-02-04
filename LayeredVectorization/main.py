@@ -301,7 +301,8 @@ def layered_vectorization(args,device=None):
                                                     count,
                                                     struct_path_num,
                                                     is_path_merging_phase=True)
-    pydiffvg.save_svg(f"./workdir/{args.file_save_name}/final.svg",img_height,img_width,shapes,shape_groups)
+    pydiffvg.save_svg(f"{args.file_save_name}",img_height,img_width,shapes,shape_groups)
+    # pydiffvg.save_svg(f"./workdir/{args.file_save_name}/final.svg",img_height,img_width,shapes,shape_groups)
 
 def load_config(file_path,args):
     with open(file_path, 'r') as file:
@@ -339,4 +340,5 @@ if __name__ == "__main__":
         args = load_config(args.config,args)
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         init_diffvg(device=device)
+
         layered_vectorization(args,device)
